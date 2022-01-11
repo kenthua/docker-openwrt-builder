@@ -16,3 +16,9 @@ WORKDIR /home/user
 
 # set dummy git config
 RUN git config --global user.name "user" && git config --global user.email "user@example.com"
+
+RUN git clone -b openwrt-21.02 https://github.com/orangepi-xunlong/openwrt && cd openwrt
+RUN ./scripts/feeds update -a
+RUN ./scripts/feeds install -a
+# make menuconfig
+RUN make -j4
