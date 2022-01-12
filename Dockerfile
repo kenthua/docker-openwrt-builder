@@ -23,6 +23,6 @@ RUN cp configs/OrangePi_R1_Plus_LTS_defconfig .config
 RUN ./scripts/feeds update -a 
 RUN ./scripts/feeds install -a 
 # make menuconfig
-RUN make -j $(nproc)
+RUN make -j $(nproc) defconfig
 
 WORKDIR /home/user
