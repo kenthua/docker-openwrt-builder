@@ -17,12 +17,13 @@ WORKDIR /home/user
 # set dummy git config
 RUN git config --global user.name "user" && git config --global user.email "user@example.com"
 
-RUN git clone -b openwrt-21.02 https://github.com/orangepi-xunlong/openwrt
+RUN git clone -b openwrt-21.02-tweaks https://github.com/kenthua/openwrt
 WORKDIR /home/user/openwrt
 RUN ./scripts/feeds update -a 
 RUN ./scripts/feeds install -a
 RUN ls -la
 RUN cp configs/OrangePi_R1_Plus_LTS_defconfig .config
+RUN make defconfig
 # make menuconfig
 RUN make -j $(nproc)
 
