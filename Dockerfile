@@ -19,12 +19,10 @@ RUN git config --global user.name "user" && git config --global user.email "user
 
 RUN git clone -b openwrt-21.02 https://github.com/orangepi-xunlong/openwrt
 WORKDIR /home/user/openwrt
-
+RUN cp configs/OrangePi_R1_Plus_LTS_defconfig .config
 RUN ./scripts/feeds update -a 
 RUN ./scripts/feeds install -a 
 # make menuconfig
-# need a terminal
-ENV TERM xterm
 RUN make -j $(nproc)
 
 WORKDIR /home/user
