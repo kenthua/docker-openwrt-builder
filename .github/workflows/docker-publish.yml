@@ -85,13 +85,12 @@ jobs:
         id: extract
         with:
           image: ${{ steps.meta.outputs.tags }}
-#          path: home/user/openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-xunlong_orangepi-r1-plus-lts-ext4-sysupgrade.img.gz
-          path: home/user/openwrt/.config
-      - name: Upload Dist
+          path: home/images/openwrt-rockchip-armv8-xunlong_orangepi-r1-plus-lts-ext4-sysupgrade.img.gz
+      - name: Upload Image Artifact
         uses: actions/upload-artifact@v2
         with:
           path: ${{ steps.extract.outputs.destination }}
-          name: openwrt-image
+          name: openwrt-rockchip-armv8-xunlong_orangepi-r1-plus-lts-ext4-sysupgrade.img
 
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
