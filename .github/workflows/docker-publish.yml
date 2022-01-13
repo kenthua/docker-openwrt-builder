@@ -84,9 +84,9 @@ jobs:
       - uses: shrink/actions-docker-extract@v1
         id: extract
         with:
-          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.tags }}
-#          path: /home/user/openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-xunlong_orangepi-r1-plus-lts-ext4-sysupgrade.img.gz
-          path: /home/user/openwrt/.config
+          image: ${{ steps.meta.outputs.tags }}
+#          path: home/user/openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-xunlong_orangepi-r1-plus-lts-ext4-sysupgrade.img.gz
+          path: home/user/openwrt/.config
       - name: Upload Dist
         uses: actions/upload-artifact@v2
         with:

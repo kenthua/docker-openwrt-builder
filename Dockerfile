@@ -19,12 +19,12 @@ RUN git config --global user.name "user" && git config --global user.email "user
 
 RUN git clone -b openwrt-21.02-tweaks https://github.com/kenthua/openwrt
 WORKDIR /home/user/openwrt
-RUN ./scripts/feeds update -a 
-RUN ./scripts/feeds install -a
+#RUN ./scripts/feeds update -a 
+#RUN ./scripts/feeds install -a
 RUN cp configs/OrangePi_R1_Plus_LTS_defconfig .config
-RUN make defconfig
+#RUN make defconfig
 #RUN make -j $(nproc)
 #RUN mkdir ${HOME}/images && cp ${HOME}/openwrt/bin/targets/rockchip/armv8/* ${HOME}/images
-RUN make clean
+#RUN make clean
 
 WORKDIR /home/user
