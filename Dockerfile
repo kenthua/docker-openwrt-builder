@@ -1,14 +1,8 @@
-FROM debian:buster
+FROM alpine:edge
 
-RUN apt-get update &&\
-    apt-get install -y \
-        sudo time git-core subversion build-essential g++ bash make \
-        libssl-dev patch libncurses5 libncurses5-dev zlib1g-dev gawk \
-        flex gettext wget unzip xz-utils python python-distutils-extra \
-        python3 python3-distutils-extra rsync curl libsnmp-dev liblzma-dev \
-        libpam0g-dev cpio rsync && \
-    apt-get clean && \
-    useradd -m user && \
+RUN apk add git build-base bash ncurses-dev perl tar findutils patch coreutils gawk grep unzip bzip2 wget python2 python3 curl diffutils bsd-compat-headers less diffutils zlib-dev file sudo rsync && \
+    addgroup -S user && \
+    adduser -D -G user user && \
     echo 'user ALL=NOPASSWD: ALL' > /etc/sudoers.d/user
 
 USER user
