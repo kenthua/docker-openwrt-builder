@@ -27,7 +27,7 @@ RUN cp configs/OrangePi_R1_Plus_LTS_defconfig .config
 RUN make defconfig
 RUN make -j $(nproc)
 RUN ls -latR /home/user/openwrt/bin
-RUN mkdir /home/user/images && mv /home/user/openwrt/bin/targets/rockchip/armv8/* /home/user/images
+RUN mkdir /home/user/images && mv /home/user/openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-* /home/user/images
 RUN ls -latR /home/user/images
 RUN make clean
 
