@@ -18,11 +18,9 @@ WORKDIR /home/user
 RUN git config --global user.name "user" \
     && git config --global user.email "user@example.com"
 
-RUN git clone -b openwrt-21.02-tweaks https://github.com/kenthua/openwrt
-
-WORKDIR /home/user/openwrt
-
-RUN ./scripts/feeds update -a &&\
+RUN git clone -b openwrt-21.02-tweaks https://github.com/kenthua/openwrt &&\
+    cd openwrt &&\
+    ./scripts/feeds update -a &&\
     ./scripts/feeds install -a &&\
     cp configs/OrangePi_R1_Plus_LTS_defconfig .config &&\
     make defconfig &&\
@@ -30,5 +28,3 @@ RUN ./scripts/feeds update -a &&\
     mkdir ${HOME}/images &&\
     mv ${HOME}/openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-* ${HOME}/images &&\
     rm -rf ${HOME}/openwrt
-    
-WORKDIR /home/user
