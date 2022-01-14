@@ -15,16 +15,20 @@ USER user
 WORKDIR /home/user
 
 # set dummy git config
-RUN git config --global user.name "user" && git config --global user.email "user@example.com"
+RUN git config --global user.name "user" \
+    && git config --global user.email "user@example.com"
 
 RUN git clone -b openwrt-21.02-tweaks https://github.com/kenthua/openwrt
 
 WORKDIR /home/user/openwrt
 
-RUN ./scripts/feeds update -a && ./scripts/feeds install -a
-RUN cp configs/OrangePi_R1_Plus_LTS_defconfig .config
-RUN make defconfig && make -j $(nproc)
-RUN mkdir /home/user/images && mv /home/user/openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-* /home/user/images
-
+RUN ./scripts/feeds update -a &&\
+    ./scripts/feeds install -a &&\
+    cp configs/OrangePi_R1_Plus_LTS_defconfig .config &&\
+    make defconfig &&\
+    make -j $(nproc) &&\
+    mkdir ${HOME}/images &&\
+    mv ${HOME}/openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-* ${HOME}/images &&\
+    rm -rf ${HOME}/openwrt
+    
 WORKDIR /home/user
-RUN rm -rf openwrt
